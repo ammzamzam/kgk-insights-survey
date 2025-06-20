@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Supplement Survey – Section 1</title>
+  <meta charset="UTF-8" />
+  <title>Section 1 Survey</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f4f4f4;
+      background-color: #f9f9f9;
       padding: 2em;
       text-align: center;
     }
@@ -14,8 +14,8 @@
     .question-box {
       background: white;
       padding: 2em;
-      margin: auto;
       max-width: 600px;
+      margin: auto;
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
@@ -35,6 +35,7 @@
       margin: 20px 0;
       border-radius: 10px;
       overflow: hidden;
+      position: relative;
     }
 
     .progress-bar {
@@ -42,6 +43,17 @@
       width: 0%;
       background-color: #007BFF;
       transition: width 0.4s ease;
+    }
+
+    .progress-text {
+      position: absolute;
+      width: 100%;
+      text-align: center;
+      top: 0;
+      line-height: 20px;
+      font-size: 0.9em;
+      font-weight: bold;
+      color: white;
     }
 
     .question p {
@@ -67,14 +79,15 @@
 </head>
 <body>
 
-  <h1>Section 1: Industry Reputation & DSHEA Reform</h1>
+  <h1>Industry Reputation & DSHEA Reform</h1>
 
   <div class="progress-container">
     <div id="progress-bar" class="progress-bar"></div>
+    <div id="progress-text" class="progress-text">0%</div>
   </div>
 
   <div class="question-box">
-    <!-- Question 1.1 -->
+    <!-- Q1 -->
     <div class="question active" id="q1">
       <p>1.1 How would you describe the current federal regulatory oversight of the U.S. dietary supplement industry?</p>
       <label><input type="radio" name="q1" value="Over-regulated"> Over-regulated</label>
@@ -83,7 +96,7 @@
       <label><input type="radio" name="q1" value="Not sure"> Not sure</label>
     </div>
 
-    <!-- Question 1.2 -->
+    <!-- Q2 -->
     <div class="question" id="q2">
       <p>1.2 Has recent media coverage (e.g., RFK Jr.’s proposed regulatory changes) had a negative impact on your business?</p>
       <label><input type="radio" name="q2" value="Yes"> Yes</label>
@@ -92,7 +105,7 @@
       <label><input type="radio" name="q2" value="Not sure"> Not sure</label>
     </div>
 
-    <!-- Question 1.3 -->
+    <!-- Q3 -->
     <div class="question" id="q3">
       <p>1.3 Do you anticipate RFK Jr.’s actions to have a negative impact on your business?</p>
       <label><input type="radio" name="q3" value="Yes"> Yes</label>
@@ -101,7 +114,7 @@
       <label><input type="radio" name="q3" value="Not sure"> Not sure</label>
     </div>
 
-    <!-- Question 1.4 -->
+    <!-- Q4 -->
     <div class="question" id="q4">
       <p>1.4 Do you believe DSHEA, as it currently stands, strikes the right balance between consumer access and safety?</p>
       <label><input type="radio" name="q4" value="Yes"> Yes</label>
@@ -110,7 +123,7 @@
       <label><input type="radio" name="q4" value="Not familiar with DSHEA"> Not familiar with DSHEA</label>
     </div>
 
-    <!-- Question 1.5 -->
+    <!-- Q5 -->
     <div class="question" id="q5">
       <p>1.5 What level of reform would you support for DSHEA?</p>
       <label><input type="radio" name="q5" value="Major overhaul"> Major overhaul</label>
@@ -123,19 +136,34 @@
   <script>
     const totalQuestions = 5;
     let current = 1;
+    const answers = {};
 
     for (let i = 1; i <= totalQuestions; i++) {
       document.querySelectorAll(`input[name=q${i}]`).forEach(input => {
         input.addEventListener("change", () => {
+          answers[`q${i}`] = input.value;
+
           document.getElementById(`q${i}`).classList.remove("active");
           current++;
-          const percent = Math.min((current - 1) / totalQuestions * 100, 100);
+
+          const percent = Math.floor((current - 1) / totalQuestions * 100);
           document.getElementById("progress-bar").style.width = percent + "%";
+          document.getElementById("progress-text").textContent = percent + "%";
 
           if (current <= totalQuestions) {
             document.getElementById(`q${current}`).classList.add("active");
           } else {
-            alert("Thank you! You’ve completed Section 1.");
+            // Submit to Google Sheets via Apps Script
+            fetch("https://script.google.com/macros/s/AKfycbwboqJQBsqD5Na8_yk_ce5WDvXc0MtDb-y9Sr8F4esqZGgh7dqU84zXXVJXuK-zo-Sfbg/exec", {
+              method: "POST",
+              mode: "no-cors",
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify(answers)
+            });
+
+            alert("Thank you! Your response was recorded.");
           }
         });
       });
@@ -143,3 +171,4 @@
   </script>
 </body>
 </html>
+
