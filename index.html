@@ -136,58 +136,57 @@
       <label><input type="radio" name="q6" value="Only with stricter guardrails"> Only with stricter guardrails</label>
       <label><input type="radio" name="q6" value="Not sure"> Not sure</label>
     </div>
-
+    
     <div class="question" id="q7">
-      <p>7. Are you currently considering submitting an NDI or GRAS notice?</p>
-      <label><input type="radio" name="q7" value="Yes"> Yes</label>
-      <label><input type="radio" name="q7" value="No"> No</label>
-      <label><input type="radio" name="q7" value="Already submitted one"> Already submitted one</label>
+      <p>7. Have you considered completing any of the following for U.S. market access? (Select all that apply)</p>
+      <label><input type="checkbox" name="q7" value="NDI Notification"> NDI Notification</label>
+      <label><input type="checkbox" name="q7" value="Self-affirmed GRAS Conclusion"> Self-affirmed GRAS Conclusion</label>
+      <label><input type="checkbox" name="q7" value="GRAS Notice to FDA"> GRAS Notice to FDA</label>
+      <button onclick="submitCheckbox('q7')">Next</button>
     </div>
-
+    
     <div class="question" id="q8">
-      <p>8. What would make you hesitant to complete an NDI Notification?</p>
-      <label><input type="radio" name="q8" value="Old ingredient with proof"> Old ingredient with proof</label>
-      <label><input type="radio" name="q8" value="Uncertain if old"> Uncertain if old</label>
-      <label><input type="radio" name="q8" value="Too expensive"> Too expensive</label>
-      <label><input type="radio" name="q8" value="No ROI"> No ROI</label>
+      <p>8. Are you currently considering submitting an NDI or GRAS notice?</p>
+      <label><input type="radio" name="q8" value="Yes"> Yes</label>
+      <label><input type="radio" name="q8" value="No"> No</label>
+      <label><input type="radio" name="q8" value="Already submitted one"> Already submitted one</label>
     </div>
 
     <div class="question" id="q9">
-      <p>9. What would prevent you from completing a self-affirmed GRAS conclusion?</p>
-      <label><input type="radio" name="q9" value="We don’t need one"> We don’t need one</label>
+      <p>8. What would make you hesitant to complete an NDI Notification?</p>
+      <label><input type="radio" name="q9" value="Old ingredient with proof"> Old ingredient with proof</label>
+      <label><input type="radio" name="q9" value="Uncertain if old"> Uncertain if old</label>
       <label><input type="radio" name="q9" value="Too expensive"> Too expensive</label>
       <label><input type="radio" name="q9" value="No ROI"> No ROI</label>
-      <label><input type="radio" name="q9" value="Waiting for policy changes"> Waiting for policy changes</label>
     </div>
 
     <div class="question" id="q10">
-      <p>10. Should the FDA take regulatory action on “NDI piggybacking”?</p>
-      <label><input type="radio" name="q10" value="Yes"> Yes</label>
-      <label><input type="radio" name="q10" value="No"> No</label>
-      <label><input type="radio" name="q10" value="Need clarity"> Need clarity</label>
+      <p>9. What would prevent you from completing a self-affirmed GRAS conclusion?</p>
+      <label><input type="radio" name="q10" value="We don’t need one"> We don’t need one</label>
+      <label><input type="radio" name="q10" value="Too expensive"> Too expensive</label>
+      <label><input type="radio" name="q10" value="No ROI"> No ROI</label>
+      <label><input type="radio" name="q10" value="Waiting for policy changes"> Waiting for policy changes</label>
     </div>
-
+    
     <div class="question" id="q11">
-      <p>11. Which regulatory system would you prefer for dietary supplements?</p>
-      <label><input type="radio" name="q11" value="Pre-market notification"> Pre-market notification</label>
-      <label><input type="radio" name="q11" value="Pre-market approval"> Pre-market approval</label>
-      <label><input type="radio" name="q11" value="Hybrid / Other"> Hybrid / Other</label>
-      <label><input type="radio" name="q11" value="Not sure"> Not sure</label>
+      <p>11. What would make you avoid submitting a GRAS Notice to FDA for your food ingredient?</p>
+      <input type="text" name="q11" id="q11_input" style="width: 90%; padding: 0.5em; border-radius: 6px; border: 1px solid #ccc;">
+      <button onclick="submitText('q11')">Submit</button>
     </div>
-
+    
     <div class="question" id="q12">
-      <p>12. What are the main reasons your company might hesitate to enter the U.S. dietary supplement market? (Select all that apply)</p>
-      <label><input type="checkbox" name="q12" value="Regulatory uncertainty"> Regulatory uncertainty</label>
-      <label><input type="checkbox" name="q12" value="Cost of compliance"> Cost of compliance</label>
-      <label><input type="checkbox" name="q12" value="Limited market interest"> Limited market interest</label>
-      <label><input type="checkbox" name="q12" value="Lack of FDA clarity"> Lack of FDA clarity</label>
-      <button onclick="submitCheckbox('q12')">Next</button>
+      <p>10. Should the FDA take regulatory action on “NDI piggybacking”?</p>
+      <label><input type="radio" name="q12" value="Yes"> Yes</label>
+      <label><input type="radio" name="q12" value="No"> No</label>
+      <label><input type="radio" name="q12" value="Need clarity"> Need clarity</label>
     </div>
 
     <div class="question" id="q13">
-      <p>13. Please provide any additional comments or concerns about FDA modernization:</p>
-      <input type="text" name="q13" id="q13_input" style="width: 90%; padding: 0.5em; border-radius: 6px; border: 1px solid #ccc;">
-      <button onclick="submitText('q13')">Submit</button>
+      <p>11. Which regulatory system would you prefer for dietary supplements?</p>
+      <label><input type="radio" name="q13" value="Pre-market notification"> Pre-market notification</label>
+      <label><input type="radio" name="q13" value="Pre-market approval"> Pre-market approval</label>
+      <label><input type="radio" name="q13" value="Hybrid / Other"> Hybrid / Other</label>
+      <label><input type="radio" name="q13" value="Not sure"> Not sure</label>
     </div>
   </div>
 
