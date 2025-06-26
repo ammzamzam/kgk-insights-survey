@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>KGK Insights Survey</title>
+  <title>Section 1 Survey</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -10,104 +10,169 @@
       padding: 2em;
       text-align: center;
     }
-    h1 {
-      color: #333;
-    }
+
     .question-box {
       background: white;
       padding: 2em;
-      max-width: 800px;
+      max-width: 600px;
       margin: auto;
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
+
+    .question {
+      display: none;
+    }
+
+    .question.active {
+      display: block;
+    }
+
+    .progress-container {
+      width: 100%;
+      background-color: #ccc;
+      height: 20px;
+      margin: 20px 0;
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background-color: #007BFF;
+      transition: width 0.4s ease;
+    }
+
+    .progress-text {
+      position: absolute;
+      width: 100%;
+      text-align: center;
+      top: 0;
+      line-height: 20px;
+      font-size: 0.9em;
+      font-weight: bold;
+      color: white;
+    }
+
+    .question p {
+      font-size: 1.2em;
+      margin-bottom: 1em;
+    }
+
     label {
       display: block;
-      margin: 0.5em 0;
+      text-align: left;
+      margin: 0.5em auto;
+      max-width: 400px;
       background: #eee;
       padding: 0.6em;
       border-radius: 6px;
       cursor: pointer;
     }
+
     input[type="radio"] {
       margin-right: 10px;
-    }
-    .submit-button {
-      margin-top: 20px;
-      padding: 1em;
-      font-size: 1.1em;
-      background-color: #007BFF;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    .submit-button:hover {
-      background-color: #0056b3;
     }
   </style>
 </head>
 <body>
-  <h1>KGK Insights Survey</h1>
+
+  <h1>Industry Reputation & DSHEA Reform</h1>
+
+  <div class="progress-container">
+    <div id="progress-bar" class="progress-bar"></div>
+    <div id="progress-text" class="progress-text">0%</div>
+  </div>
+
   <div class="question-box">
-    <form id="kgkSurvey">
-      <p><strong>1.1 How would you describe the current federal regulatory oversight of the U.S. dietary supplement industry?</strong></p>
-      <label><input type="radio" name="q1_1" value="Over-regulated">Over-regulated</label>
-      <label><input type="radio" name="q1_1" value="Under-regulated">Under-regulated</label>
-      <label><input type="radio" name="q1_1" value="Just right">Just right</label>
-      <label><input type="radio" name="q1_1" value="Not sure">Not sure</label>
+    <!-- Questions -->
+    <div class="question active" id="q1">
+      <p>1.1 How would you describe the current federal regulatory oversight of the U.S. dietary supplement industry?</p>
+      <label><input type="radio" name="q1" value="Over-regulated"> Over-regulated</label>
+      <label><input type="radio" name="q1" value="Under-regulated"> Under-regulated</label>
+      <label><input type="radio" name="q1" value="Just right"> Just right</label>
+      <label><input type="radio" name="q1" value="Not sure"> Not sure</label>
+    </div>
 
-      <p><strong>1.2 Has recent media coverage had a negative impact on your business?</strong></p>
-      <label><input type="radio" name="q1_2" value="Yes">Yes</label>
-      <label><input type="radio" name="q1_2" value="No">No</label>
-      <label><input type="radio" name="q1_2" value="Somewhat">Somewhat</label>
-      <label><input type="radio" name="q1_2" value="Not sure">Not sure</label>
+    <div class="question" id="q2">
+      <p>1.2 Has recent media coverage (e.g., RFK Jr.’s proposed regulatory changes) had a negative impact on your business?</p>
+      <label><input type="radio" name="q2" value="Yes"> Yes</label>
+      <label><input type="radio" name="q2" value="No"> No</label>
+      <label><input type="radio" name="q2" value="Somewhat"> Somewhat</label>
+      <label><input type="radio" name="q2" value="Not sure"> Not sure</label>
+    </div>
 
-      <p><strong>1.3 Do you anticipate RFK Jr.'s actions to have a negative impact on your business?</strong></p>
-      <label><input type="radio" name="q1_3" value="Yes">Yes</label>
-      <label><input type="radio" name="q1_3" value="No">No</label>
-      <label><input type="radio" name="q1_3" value="Possibly">Possibly</label>
-      <label><input type="radio" name="q1_3" value="Not sure">Not sure</label>
+    <div class="question" id="q3">
+      <p>1.3 Do you anticipate RFK Jr.’s actions to have a negative impact on your business?</p>
+      <label><input type="radio" name="q3" value="Yes"> Yes</label>
+      <label><input type="radio" name="q3" value="No"> No</label>
+      <label><input type="radio" name="q3" value="Possibly"> Possibly</label>
+      <label><input type="radio" name="q3" value="Not sure"> Not sure</label>
+    </div>
 
-      <p><strong>1.4 Do you believe DSHEA strikes the right balance between access and safety?</strong></p>
-      <label><input type="radio" name="q1_4" value="Yes">Yes</label>
-      <label><input type="radio" name="q1_4" value="No">No</label>
-      <label><input type="radio" name="q1_4" value="Needs review">Needs review</label>
-      <label><input type="radio" name="q1_4" value="Not familiar with DSHEA">Not familiar with DSHEA</label>
+    <div class="question" id="q4">
+      <p>1.4 Do you believe DSHEA strikes the right balance between access and safety?</p>
+      <label><input type="radio" name="q4" value="Yes"> Yes</label>
+      <label><input type="radio" name="q4" value="No"> No</label>
+      <label><input type="radio" name="q4" value="Needs review"> Needs review</label>
+      <label><input type="radio" name="q4" value="Not familiar with DSHEA"> Not familiar with DSHEA</label>
+    </div>
 
-      <p><strong>1.5 What level of reform would you support for DSHEA?</strong></p>
-      <label><input type="radio" name="q1_5" value="Major overhaul">Major overhaul</label>
-      <label><input type="radio" name="q1_5" value="Minor tweaks">Minor tweaks</label>
-      <label><input type="radio" name="q1_5" value="No changes needed">No changes needed</label>
-      <label><input type="radio" name="q1_5" value="Not sure">Not sure</label>
-
-      <button type="submit" class="submit-button">Submit</button>
-    </form>
+    <div class="question" id="q5">
+      <p>1.5 What level of reform would you support for DSHEA?</p>
+      <label><input type="radio" name="q5" value="Major overhaul"> Major overhaul</label>
+      <label><input type="radio" name="q5" value="Minor tweaks"> Minor tweaks</label>
+      <label><input type="radio" name="q5" value="No changes needed"> No changes needed</label>
+      <label><input type="radio" name="q5" value="Not sure"> Not sure</label>
+    </div>
   </div>
 
   <script>
-    document.getElementById('kgkSurvey').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const formData = new FormData(e.target);
-      const data = {};
-      formData.forEach((value, key) => {
-        data[key] = value;
-      });
+    const total = 5;
+    let current = 1;
+    const answers = {};
 
-      fetch("https://script.google.com/macros/s/AKfycbwboqJQBsqD5Na8_yk_ce5WDvXc0MtDb-y9Sr8F4esqZGgh7dqU84zXXVJXuK-zo-Sfbg/exec", {
-        method: "POST",
-        mode: "no-cors",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-      });
+    function updateProgress() {
+      const percent = Math.floor((current - 1) / total * 100);
+      document.getElementById("progress-bar").style.width = percent + "%";
+      document.getElementById("progress-text").textContent = percent + "%";
+    }
 
-      alert("Thank you! Your response was recorded.");
-      e.target.reset();
-    });
+    function showNext() {
+      if (current < total) {
+        document.getElementById("q" + current).classList.remove("active");
+        current++;
+        document.getElementById("q" + current).classList.add("active");
+        updateProgress();
+      } else {
+        // Submit
+        fetch("https://script.google.com/macros/s/AKfycbwboqJQBsqD5Na8_yk_ce5WDvXc0MtDb-y9Sr8F4esqZGgh7dqU84zXXVJXuK-zo-Sfbg/exec", {
+          method: "POST",
+          mode: "no-cors",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(answers)
+        });
+
+        alert("Thank you! Your response was recorded.");
+      }
+    }
+
+    for (let i = 1; i <= total; i++) {
+      document.querySelectorAll(`input[name=q${i}]`).forEach(input => {
+        input.addEventListener("change", () => {
+          answers[`q${i}`] = input.value;
+          showNext();
+        });
+      });
+    }
+
+    updateProgress();
   </script>
 </body>
 </html>
+
 
