@@ -94,6 +94,8 @@
   </div>
 
   <div class="question-box" id="question-box">
+
+    <!-- Section 1 Questions -->
     <div class="question active" id="q1">
       <p>1.1 How would you describe the current federal regulatory oversight of the U.S. dietary supplement industry?</p>
       <label><input type="radio" name="q1" value="Over-regulated"> Over-regulated</label>
@@ -134,6 +136,7 @@
       <label><input type="radio" name="q5" value="Not sure"> Not sure</label>
     </div>
 
+    <!-- Section 2 -->
     <h2 id="section-title-2">Section 2: FDA Authority & DSHEA Modernization</h2>
 
     <div class="question" id="q6">
@@ -201,6 +204,70 @@
     <p><strong>– KGK Science Inc.</strong></p>
   </div>
 
+  <script>
+    const total = 13;
+    let current = 1;
+    const answers = {};
+
+    function updateProgress() {
+      const percent = Math.floor((current - 1) / total * 100);
+      document.getElementById("progress-bar").style.width = percent + "%";
+      document.getElementById("progress-text").textContent = percent + "%";
+    }
+
+    function showNext() {
+      if (current < total) {
+        document.getElementById("q" + current).classList.remove("active");
+        current++;
+        document.getElementById("q" + current).classList.add("active");
+        updateProgress();
+      } else {
+        document.getElementById("progress-bar").style.width = "100%";
+        document.getElementById("progress-text").textContent = "100%";
+        document.getElementById("question-box").style.display = "none";
+        document.getElementById("progress-container").style.display = "none";
+        document.getElementById("section-title").style.display = "none";
+        document.getElementById("section-title-2").style.display = "none";
+        document.getElementById("thank-you").style.display = "block";
+
+        fetch("https://script.google.com/macros/s/AKfycbwboqJQBsqD5Na8_yk_ce5WDvXc0MtDb-y9Sr8F4esqZGgh7dqU84zXXVJXuK-zo-Sfbg/exec", {
+          method: "POST",
+          mode: "no-cors",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(answers)
+        });
+      }
+    }
+
+    for (let i = 1; i <= total; i++) {
+      if (i === 11) {
+        const input = document.querySelector(`#q${i} input`);
+        input.addEventListener("blur", () => {
+          answers[`q${i}`] = input.value.trim();
+          showNext();
+        });
+      } else {
+        document.querySelectorAll(`input[name=q${i}]`).forEach(input => {
+          input.addEventListener("change", () => {
+            if (input.type === "checkbox") {
+              if (!answers[`q${i}`]) answers[`q${i}`] = [];
+              if (input.checked) {
+                answers[`q${i}`].push(input.value);
+              } else {
+                answers[`q${i}`] = answers[`q${i}`].filter(v => v !== input.value);
+              }
+            } else {
+              answers[`q${i}`] = input.value;
+              showNext();
+            }
+          });
+        });
+      }
+    }
+
+    updateProgress();
+  </script>
 </body>
 </html>
-
