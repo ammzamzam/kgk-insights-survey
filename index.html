@@ -86,7 +86,8 @@
 <body>
 
   <h1>KGK Insights Survey</h1>
-  <h2>Section 1: Industry Reputation & DSHEA Reform</h2>
+  <h2 id="section-title">Section 1: Industry Reputation & DSHEA Reform</h2>
+
 
   <div class="progress-container" id="progress-container">
     <div id="progress-bar" class="progress-bar"></div>
@@ -167,7 +168,7 @@
         // Hide survey and show thank you
         document.getElementById("question-box").style.display = "none";
         document.getElementById("progress-container").style.display = "none";
-        document.querySelector("h2").style.display = "none";
+        document.getElementById("section-title").style.display = "none";
         document.getElementById("thank-you").style.display = "block";
 
         // Submit
