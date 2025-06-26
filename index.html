@@ -10,7 +10,9 @@
       padding: 2em;
       text-align: center;
     }
-
+    h1 {
+      color: #333;
+    }
     .question-box {
       background: white;
       padding: 2em;
@@ -19,50 +21,6 @@
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-
-    .question {
-      display: none;
-      text-align: left;
-    }
-
-    .question.active {
-      display: block;
-    }
-
-    .progress-container {
-      width: 100%;
-      background-color: #ccc;
-      height: 20px;
-      margin: 20px 0;
-      border-radius: 10px;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .progress-bar {
-      height: 100%;
-      width: 0%;
-      background-color: orange;
-      transition: width 0.4s ease;
-    }
-
-    .progress-text {
-      position: absolute;
-      width: 100%;
-      text-align: center;
-      top: 0;
-      line-height: 20px;
-      font-size: 0.9em;
-      font-weight: bold;
-      color: white;
-    }
-
-    .question p, .section-title {
-      font-size: 1.1em;
-      margin-bottom: 1em;
-      font-weight: bold;
-    }
-
     label {
       display: block;
       margin: 0.5em 0;
@@ -71,136 +29,85 @@
       border-radius: 6px;
       cursor: pointer;
     }
-
-    input[type="radio"], input[type="checkbox"] {
+    input[type="radio"] {
       margin-right: 10px;
     }
-
-    textarea {
-      width: 100%;
-      height: 100px;
-      margin: 1em 0;
+    .submit-button {
+      margin-top: 20px;
       padding: 1em;
-      font-size: 1em;
-      border-radius: 6px;
-      border: 1px solid #ccc;
+      font-size: 1.1em;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .submit-button:hover {
+      background-color: #0056b3;
     }
   </style>
 </head>
 <body>
-
   <h1>KGK Insights Survey</h1>
+  <div class="question-box">
+    <form id="kgkSurvey">
+      <p><strong>1.1 How would you describe the current federal regulatory oversight of the U.S. dietary supplement industry?</strong></p>
+      <label><input type="radio" name="q1_1" value="Over-regulated">Over-regulated</label>
+      <label><input type="radio" name="q1_1" value="Under-regulated">Under-regulated</label>
+      <label><input type="radio" name="q1_1" value="Just right">Just right</label>
+      <label><input type="radio" name="q1_1" value="Not sure">Not sure</label>
 
-  <div class="progress-container">
-    <div id="progress-bar" class="progress-bar"></div>
-    <div id="progress-text" class="progress-text">0%</div>
-  </div>
+      <p><strong>1.2 Has recent media coverage had a negative impact on your business?</strong></p>
+      <label><input type="radio" name="q1_2" value="Yes">Yes</label>
+      <label><input type="radio" name="q1_2" value="No">No</label>
+      <label><input type="radio" name="q1_2" value="Somewhat">Somewhat</label>
+      <label><input type="radio" name="q1_2" value="Not sure">Not sure</label>
 
-  <div class="question-box" id="survey-box">
-    <!-- Questions will be injected by JavaScript -->
-  </div>
+      <p><strong>1.3 Do you anticipate RFK Jr.'s actions to have a negative impact on your business?</strong></p>
+      <label><input type="radio" name="q1_3" value="Yes">Yes</label>
+      <label><input type="radio" name="q1_3" value="No">No</label>
+      <label><input type="radio" name="q1_3" value="Possibly">Possibly</label>
+      <label><input type="radio" name="q1_3" value="Not sure">Not sure</label>
 
-  <div id="thank-you" class="question" style="text-align: center;">
-    <h2>Thank you for completing the survey!</h2>
-    <p>Your responses have been recorded.</p>
-    <p><strong>– KGK Science Inc.</strong></p>
+      <p><strong>1.4 Do you believe DSHEA strikes the right balance between access and safety?</strong></p>
+      <label><input type="radio" name="q1_4" value="Yes">Yes</label>
+      <label><input type="radio" name="q1_4" value="No">No</label>
+      <label><input type="radio" name="q1_4" value="Needs review">Needs review</label>
+      <label><input type="radio" name="q1_4" value="Not familiar with DSHEA">Not familiar with DSHEA</label>
+
+      <p><strong>1.5 What level of reform would you support for DSHEA?</strong></p>
+      <label><input type="radio" name="q1_5" value="Major overhaul">Major overhaul</label>
+      <label><input type="radio" name="q1_5" value="Minor tweaks">Minor tweaks</label>
+      <label><input type="radio" name="q1_5" value="No changes needed">No changes needed</label>
+      <label><input type="radio" name="q1_5" value="Not sure">Not sure</label>
+
+      <button type="submit" class="submit-button">Submit</button>
+    </form>
   </div>
 
   <script>
-const questions = [
-  { title: "1. Industry Reputation & DSHEA Reform", type: "header" },
-  { id: "q1_1", q: "1.1 How would you describe the current federal regulatory oversight of the U.S. dietary supplement industry?", type: "radio", options: ["Over-regulated", "Under-regulated", "Just right", "Not sure"] },
-  { id: "q1_2", q: "1.2 Has recent media coverage (e.g., RFK Jr.’s proposed regulatory changes) had a negative impact on your business?", type: "radio", options: ["Yes", "No", "Somewhat", "Not sure"] },
-  { id: "q1_3", q: "1.3 Do you anticipate RFK Jr.’s actions to have a negative impact on your business?", type: "radio", options: ["Yes", "No", "Possibly", "Not sure"] },
-  { id: "q1_4", q: "1.4 Do you believe DSHEA strikes the right balance between access and safety?", type: "radio", options: ["Yes", "No", "Needs review", "Not familiar with DSHEA"] },
-  { id: "q1_5", q: "1.5 What level of reform would you support for DSHEA?", type: "radio", options: ["Major overhaul", "Minor tweaks", "No changes needed", "Not sure"] }
-];
+    document.getElementById('kgkSurvey').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const data = {};
+      formData.forEach((value, key) => {
+        data[key] = value;
+      });
 
-    const box = document.getElementById("survey-box");
-    const answers = {};
-    let currentIndex = 0;
+      fetch("https://script.google.com/macros/s/AKfycbwboqJQBsqD5Na8_yk_ce5WDvXc0MtDb-y9Sr8F4esqZGgh7dqU84zXXVJXuK-zo-Sfbg/exec", {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      });
 
-    function renderQuestion(index) {
-      box.innerHTML = "";
-      const q = questions[index];
-      if (!q) return;
-
-      const div = document.createElement("div");
-      div.className = "question active";
-
-      if (q.type === "header") {
-        div.innerHTML = `<div class='section-title'>${q.title}</div>`;
-        box.appendChild(div);
-        setTimeout(() => nextQuestion(), 1000);
-        return;
-      }
-
-      const p = document.createElement("p");
-      p.textContent = q.q;
-      div.appendChild(p);
-
-      if (q.type === "radio" || q.type === "checkbox") {
-        q.options.forEach(opt => {
-          const label = document.createElement("label");
-          const input = document.createElement("input");
-          input.type = q.type;
-          input.name = q.id;
-          input.value = opt;
-          label.appendChild(input);
-          label.appendChild(document.createTextNode(opt));
-          div.appendChild(label);
-        });
-      } else if (q.type === "text") {
-        const textarea = document.createElement("textarea");
-        textarea.name = q.id;
-        div.appendChild(textarea);
-      }
-
-      const nextBtn = document.createElement("button");
-      nextBtn.textContent = "Next";
-      nextBtn.style.marginTop = "20px";
-      nextBtn.onclick = () => {
-        if (q.type === "radio") {
-          const selected = document.querySelector(`input[name='${q.id}']:checked`);
-          if (selected) answers[q.id] = selected.value;
-        } else if (q.type === "checkbox") {
-          const selected = document.querySelectorAll(`input[name='${q.id}']:checked`);
-          answers[q.id] = Array.from(selected).map(x => x.value);
-        } else if (q.type === "text") {
-          const val = document.querySelector(`textarea[name='${q.id}']`).value;
-          answers[q.id] = val;
-        }
-        nextQuestion();
-      };
-      div.appendChild(nextBtn);
-
-      box.appendChild(div);
-    }
-
-    function nextQuestion() {
-      currentIndex++;
-      const percent = Math.floor((currentIndex) / questions.length * 100);
-      document.getElementById("progress-bar").style.width = percent + "%";
-      document.getElementById("progress-text").textContent = percent + "%";
-
-      if (currentIndex >= questions.length) {
-        document.getElementById("survey-box").style.display = "none";
-        document.getElementById("thank-you").style.display = "block";
-
-        fetch("https://script.google.com/macros/s/AKfycbwboqJQBsqD5Na8_yk_ce5WDvXc0MtDb-y9Sr8F4esqZGgh7dqU84zXXVJXuK-zo-Sfbg/exec", {
-          method: "POST",
-          mode: "no-cors",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(answers)
-        });
-      } else {
-        renderQuestion(currentIndex);
-      }
-    }
-
-    renderQuestion(currentIndex);
+      alert("Thank you! Your response was recorded.");
+      e.target.reset();
+    });
   </script>
 </body>
 </html>
+
