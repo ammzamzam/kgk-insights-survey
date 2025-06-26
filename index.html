@@ -175,14 +175,14 @@
     </div>
     
     <div class="question" id="q12">
-      <p>10. Should the FDA take regulatory action on “NDI piggybacking”?</p>
+      <p>12. Should the FDA take regulatory action on “NDI piggybacking”?</p>
       <label><input type="radio" name="q12" value="Yes"> Yes</label>
       <label><input type="radio" name="q12" value="No"> No</label>
       <label><input type="radio" name="q12" value="Need clarity"> Need clarity</label>
     </div>
 
     <div class="question" id="q13">
-      <p>11. Which regulatory system would you prefer for dietary supplements?</p>
+      <p>13. Which regulatory system would you prefer for dietary supplements?</p>
       <label><input type="radio" name="q13" value="Pre-market notification"> Pre-market notification</label>
       <label><input type="radio" name="q13" value="Pre-market approval"> Pre-market approval</label>
       <label><input type="radio" name="q13" value="Hybrid / Other"> Hybrid / Other</label>
@@ -230,11 +230,15 @@
     }
 
     for (let i = 1; i <= 13; i++) {
-      document.querySelectorAll(`input[name=q${i}]`).forEach(input => {
-        input.addEventListener("change", () => {
-          answers[`q${i}`] = input.value;
-          showNext();
-        });
+      const inputs = document.querySelectorAll(`input[name=q${i}]`);
+      inputs.forEach(input => {
+        // Skip checkboxes — handled manually by submitCheckbox()
+        if (input.type === "radio") {
+          input.addEventListener("change", () => {
+            answers[`q${i}`] = input.value;
+            showNext();
+          });
+        }
       });
     }
 
