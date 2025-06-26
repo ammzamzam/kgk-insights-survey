@@ -72,7 +72,7 @@
       cursor: pointer;
     }
 
-    input[type="radio"] {
+    input[type="radio"], input[type="checkbox"] {
       margin-right: 10px;
     }
 
@@ -88,14 +88,12 @@
   <h1>KGK Insights Survey</h1>
   <h2 id="section-title">Section 1: Industry Reputation & DSHEA Reform</h2>
 
-
   <div class="progress-container" id="progress-container">
     <div id="progress-bar" class="progress-bar"></div>
     <div id="progress-text" class="progress-text">0%</div>
   </div>
 
   <div class="question-box" id="question-box">
-    <!-- Questions -->
     <div class="question active" id="q1">
       <p>1.1 How would you describe the current federal regulatory oversight of the U.S. dietary supplement industry?</p>
       <label><input type="radio" name="q1" value="Over-regulated"> Over-regulated</label>
@@ -135,6 +133,66 @@
       <label><input type="radio" name="q5" value="No changes needed"> No changes needed</label>
       <label><input type="radio" name="q5" value="Not sure"> Not sure</label>
     </div>
+
+    <h2 id="section-title-2">Section 2: FDA Authority & DSHEA Modernization</h2>
+
+    <div class="question" id="q6">
+      <p>2.1 Should the FDA have expanded authority to remove unsafe products or ingredients without first proving “significant or unreasonable risk”?</p>
+      <label><input type="radio" name="q6" value="Yes"> Yes</label>
+      <label><input type="radio" name="q6" value="No"> No</label>
+      <label><input type="radio" name="q6" value="Only with stricter guardrails"> Only with stricter guardrails</label>
+      <label><input type="radio" name="q6" value="Not sure"> Not sure</label>
+    </div>
+
+    <div class="question" id="q7">
+      <p>2.2 Have you considered completing any of the following for U.S. market access?</p>
+      <label><input type="checkbox" name="q7" value="NDI Notification"> NDI Notification</label>
+      <label><input type="checkbox" name="q7" value="Self-affirmed GRAS Conclusion"> Self-affirmed GRAS Conclusion</label>
+      <label><input type="checkbox" name="q7" value="GRAS Notice to FDA"> GRAS Notice to FDA</label>
+    </div>
+
+    <div class="question" id="q8">
+      <p>2.3 Are you currently considering completing an NDI Notification, self-affirmed GRAS conclusion, or GRAS Notice?</p>
+      <label><input type="radio" name="q8" value="Yes"> Yes</label>
+      <label><input type="radio" name="q8" value="No"> No</label>
+      <label><input type="radio" name="q8" value="Already submitted one"> Already submitted one</label>
+    </div>
+
+    <div class="question" id="q9">
+      <p>2.4 What would make you hesitant to complete an NDI Notification for your dietary ingredient?</p>
+      <label><input type="radio" name="q9" value="Old ingredient with proof"> I don’t need one; the ingredient is old and I have proof</label>
+      <label><input type="radio" name="q9" value="Uncertain if old"> I believe it’s old but I'm not certain</label>
+      <label><input type="radio" name="q9" value="Too expensive"> Too expensive</label>
+      <label><input type="radio" name="q9" value="No ROI"> No return on investment (ROI)</label>
+    </div>
+
+    <div class="question" id="q10">
+      <p>2.5 What would prevent you from completing a self-affirmed GRAS conclusion for your food ingredient?</p>
+      <label><input type="radio" name="q10" value="We don’t need one"> We don’t need one</label>
+      <label><input type="radio" name="q10" value="Too expensive"> Too expensive</label>
+      <label><input type="radio" name="q10" value="No ROI"> No ROI</label>
+      <label><input type="radio" name="q10" value="Waiting for policy changes"> Waiting to see how regulatory policies develop (e.g., RFK Jr.’s proposals)</label>
+    </div>
+
+    <div class="question" id="q11">
+      <p>2.6 What would make you avoid submitting a GRAS Notice to FDA for your food ingredient?</p>
+      <input type="text" name="q11" style="width: 90%; padding: 0.5em; border-radius: 6px; border: 1px solid #ccc;">
+    </div>
+
+    <div class="question" id="q12">
+      <p>2.7 Should the FDA take regulatory action on “NDI piggybacking”?</p>
+      <label><input type="radio" name="q12" value="Yes"> Yes</label>
+      <label><input type="radio" name="q12" value="No"> No</label>
+      <label><input type="radio" name="q12" value="Need clarity"> Need more clarity on the practice</label>
+    </div>
+
+    <div class="question" id="q13">
+      <p>2.8 Which regulatory system would you prefer for dietary supplements in the U.S.?</p>
+      <label><input type="radio" name="q13" value="Pre-market notification"> Pre-market notification (current system)</label>
+      <label><input type="radio" name="q13" value="Pre-market approval"> Pre-market approval (similar to drugs)</label>
+      <label><input type="radio" name="q13" value="Hybrid / Other"> Hybrid / Other</label>
+      <label><input type="radio" name="q13" value="Not sure"> Not sure</label>
+    </div>
   </div>
 
   <div id="thank-you">
@@ -143,57 +201,6 @@
     <p><strong>– KGK Science Inc.</strong></p>
   </div>
 
-  <script>
-    const total = 5;
-    let current = 1;
-    const answers = {};
-
-    function updateProgress() {
-      const percent = Math.floor((current - 1) / total * 100);
-      document.getElementById("progress-bar").style.width = percent + "%";
-      document.getElementById("progress-text").textContent = percent + "%";
-    }
-
-    function showNext() {
-      if (current < total) {
-        document.getElementById("q" + current).classList.remove("active");
-        current++;
-        document.getElementById("q" + current).classList.add("active");
-        updateProgress();
-      } else {
-        // Final update to 100%
-        document.getElementById("progress-bar").style.width = "100%";
-        document.getElementById("progress-text").textContent = "100%";
-
-        // Hide survey and show thank you
-        document.getElementById("question-box").style.display = "none";
-        document.getElementById("progress-container").style.display = "none";
-        document.getElementById("section-title").style.display = "none";
-        document.getElementById("thank-you").style.display = "block";
-
-        // Submit
-        fetch("https://script.google.com/macros/s/AKfycbwboqJQBsqD5Na8_yk_ce5WDvXc0MtDb-y9Sr8F4esqZGgh7dqU84zXXVJXuK-zo-Sfbg/exec", {
-          method: "POST",
-          mode: "no-cors",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(answers)
-        });
-      }
-    }
-
-    for (let i = 1; i <= total; i++) {
-      document.querySelectorAll(`input[name=q${i}]`).forEach(input => {
-        input.addEventListener("change", () => {
-          answers[`q${i}`] = input.value;
-          showNext();
-        });
-      });
-    }
-
-    updateProgress();
-  </script>
 </body>
 </html>
 
