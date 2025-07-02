@@ -32,7 +32,7 @@
     .progress-bar {
       height: 100%;
       width: 0%;
-      background-color: orange;
+      background-color: #ff7900;
       transition: width 0.4s ease;
     }
     .progress-text {
@@ -58,6 +58,11 @@
       padding: 0.6em;
       border-radius: 6px;
       cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+  label:hover {
+    background-color: #ff7900;
+    color: white;
     }
     input[type="radio"], input[type="checkbox"] {
       margin-right: 10px;
